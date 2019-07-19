@@ -33,12 +33,7 @@ public abstract class GeneralList implements Saveable, Loadable{
     }
 
     //EFFECTS: displays the to-do postings
-    //TODO: THIS MUST BE OVERRIDEN IN THE SHOPPING LIST METHOD, BECAUSE SHOPPING LIST CONSIST OF PRICE AND QTY
-    public void showPostings(){
-        for(Todo item : todoList){
-            System.out.println(item.getTodoPosting() + "\n");
-        }
-    }
+    public abstract void showPostings();
 
     @Override
     public void save() {

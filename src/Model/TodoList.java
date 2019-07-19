@@ -12,7 +12,12 @@ public class TodoList extends GeneralList{
         String posting = item.getTodoPosting();
     }
 
-
+    @Override
+    public void showPostings() {
+        for(Todo item : todoList){
+            System.out.println(item.getTodoPosting() + "\n");
+        }
+    }
 
 
 }

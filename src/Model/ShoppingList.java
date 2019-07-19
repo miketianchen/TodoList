@@ -57,4 +57,11 @@ public class ShoppingList extends GeneralList{
             return null;
         }
     }
+
+    @Override
+    public void showPostings() {
+        for(Todo item : todoList){
+            System.out.println("Item: " + item.getShoppingPosting() + ". Cost: " + item.getPrice() + ". Quantity: " + item.getQuantity());
+        }
+    }
 }

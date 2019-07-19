@@ -1,5 +1,6 @@
 package ui;
 
+import Model.ShoppingList;
 import Model.Todo;
 import Model.TodoList;
 
@@ -7,6 +8,7 @@ import java.util.Scanner;
 
 public class main {
     private TodoList todoList = new TodoList();
+    private ShoppingList shoppingList = new ShoppingList();
     private boolean runtimeCondition = false;
     private Scanner sc = new Scanner(System.in);
 
@@ -17,6 +19,8 @@ public class main {
 
     }
 
+
+    //TODO: WRITE A METHOD TO ELIMINATE DUPLICATED CODE
     //MODIFIES: this
     //EFFECTS: initiate the entire program, starting the ui
     public void initiateProgram(){
@@ -53,29 +57,43 @@ public class main {
                 }
             }
         }else if (listOption.equals("1")){
+            shoppingList.setNameOfList(promptForListName());
+            while(!runtimeCondition){
 
+                System.out.println("Please what item you want to purchase");
+                String itemName = sc.nextLine();
+                System.out.println("Please enter quantity you wish to purchase");
+                int itemQuantity = Integer.parseInt(sc.nextLine());
+                System.out.println("Enter the price if you know how much it cost, 0 otherwise");
+                int itemPrice = Integer.parseInt(sc.nextLine());
+
+                Todo shoppingTodo = new Todo(itemName,itemQuantity, itemPrice);
+                shoppingList.addToList(shoppingTodo);
+
+                System.out.println("Enter [0] if you wish to view your Shopping List");
+                System.out.println("Enter [1] if you wish to enter another Shopping Item");
+                System.out.println("Enter [2] if you wish to exit application");
+                System.out.println("Enter [3] if you wish to save your Shopping List");
+                String userChoiceInput = sc.nextLine();
+
+                switch (userChoiceInput){
+                    case "0":
+                        shoppingList.showPostings();
+                        break;
+                    case "1":
+                        break;
+                    case "2":
+                        runtimeCondition = true;
+                        break;
+                    case "3":
+                        todoList.save();
+                        runtimeCondition = true;
+                        break;
+                }
+            }
         }else{
             System.out.println("Error Please select one of the valid options");
         }
-
-//        System.out.println("Press [1] if you would like to save a new entry or press [0] if you would like to see saved entries");
-//        if (sc.nextInt() == 0){
-//            Loadable load = new TodoList();
-//            load.load();
-//        }else {
-//            while(!runtimeCondition){
-//                String userListInput = promptForTodoPosting();
-//                Todo todo = new Todo(userListInput);
-//                todoList.add(todo);
-//                String userChoiceInput = promptForOptions();
-//                switch(userChoiceInput){
-//                    case "0": showPostings(todoList);
-//                    case "1": break;
-//                    case "2": runtimeCondition = true;
-//                    case "3": this.save(todoList);
-//                }
-//            }
-//        }
         sc.close();
     }
 
