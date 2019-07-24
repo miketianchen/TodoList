@@ -37,9 +37,9 @@ public class ShoppingList extends GeneralList{
     }
 
     @Override
-    public List<Todo> load() {
+    public List<Todo> load(String listName) {
         try {
-            FileReader fr = new FileReader(nameOfList + ".txt");
+            FileReader fr = new FileReader(listName + ".txt");
             BufferedReader br = new BufferedReader(fr);
 
             String str;

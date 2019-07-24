@@ -1,9 +1,12 @@
 package ui;
 
+import Model.Exception.InvalidInputException;
+import Model.Exception.TooManyItemException;
 import Model.ShoppingList;
 import Model.Todo;
 import Model.TodoList;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class main {
@@ -24,6 +27,7 @@ public class main {
     //MODIFIES: this
     //EFFECTS: initiate the entire program, starting the ui
     public void initiateProgram(){
+
         String listOption = promptForShoppingOrTodoList();
         if(listOption.equals("0")){
             todoList.setNameOfList(promptForListName());
@@ -33,14 +37,28 @@ public class main {
                 String userListInput = sc.nextLine();
 
                 Todo todo = new Todo(userListInput);
-                todoList.addToList(todo);
+                try {
+                    todoList.addToList(todo);
+                } catch (TooManyItemException e) {
+                    System.out.println("Try ticking off some of your Todo Items before adding a new Item!");
+                    break;
+                } finally {
+                    System.out.println(todoList.getNameOfList() + " Todo List");
+                }
 
                 System.out.println("Enter [0] if you wish to view your Todo List");
                 System.out.println("Enter [1] if you wish to enter another to-do posting");
                 System.out.println("Enter [2] if you wish to exit application");
                 System.out.println("Enter [3] if you wish to save your Todo List");
                 String userChoiceInput = sc.nextLine();
-
+                if(!userChoiceInput.equals("0") && !userChoiceInput.equals("1") && !userChoiceInput.equals("2") && !userChoiceInput.equals(("3"))){
+                    try {
+                        throw new InvalidInputException();
+                    } catch (InvalidInputException e) {
+                        System.out.println("Please enter a proper Input");
+                        userChoiceInput = sc.nextLine();
+                    }
+                }
                 switch(userChoiceInput){
                     case "0":
                         todoList.showPostings();
@@ -55,6 +73,7 @@ public class main {
                         runtimeCondition = true;
                         break;
                 }
+
             }
         }else if (listOption.equals("1")){
             shoppingList.setNameOfList(promptForListName());
@@ -68,7 +87,11 @@ public class main {
                 int itemPrice = Integer.parseInt(sc.nextLine());
 
                 Todo shoppingTodo = new Todo(itemName,itemQuantity, itemPrice);
-                shoppingList.addToList(shoppingTodo);
+                try {
+                    shoppingList.addToList(shoppingTodo);
+                } catch (TooManyItemException e) {
+                    System.out.println("Tick off some of your Shopping Items before adding new ones");
+                }
 
                 System.out.println("Enter [0] if you wish to view your Shopping List");
                 System.out.println("Enter [1] if you wish to enter another Shopping Item");
@@ -91,7 +114,9 @@ public class main {
                         break;
                 }
             }
-        }else{
+        }else if (listOption.equals("2")){
+            promptForSavedFile();
+        } else{
             System.out.println("Error Please select one of the valid options");
         }
         sc.close();
@@ -103,7 +128,7 @@ public class main {
     }
 
     private String promptForShoppingOrTodoList(){
-        System.out.println("Enter [0] if you would like to curate a TODO LIST and [1] for a SHOPPING LIST");
+        System.out.println("Enter [0] if you would like to curate a TODO LIST and [1] for a SHOPPING LIST or if you wish to view your SAVED LIST [2]");
         return sc.nextLine();
     }
 
@@ -127,5 +152,13 @@ public class main {
         return value;
     }
 
-
+    private void promptForSavedFile(){
+        System.out.println("Please enter the name of the list you wish to retrieve: ");
+        String fileName = sc.nextLine();
+        try {
+            todoList.load(fileName);
+        } catch (FileNotFoundException e) {
+            System.out.println(fileName + " CANNOT BE FOUND!");
+        }
+    }
 }

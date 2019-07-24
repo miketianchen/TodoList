@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Exception.TooManyItemException;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,10 @@ public abstract class GeneralList implements Saveable, Loadable{
 
     //MODIFIES: this
     //EFFECTS: allows the user to add a to-do item to the to-do list
-    public void addToList(Todo item){
+    public void addToList(Todo item) throws TooManyItemException {
+        if (todoList.size() >= 5){
+            throw new TooManyItemException();
+        }
         todoList.add(item);
     }
 
@@ -30,6 +35,10 @@ public abstract class GeneralList implements Saveable, Loadable{
     //EFFECTS: allows the user to retrieve the to-do list
     public List<Todo> retrieveTodoList(){
         return todoList;
+    }
+
+    public int sizeOfList(){
+        return todoList.size();
     }
 
     //EFFECTS: displays the to-do postings
@@ -51,11 +60,10 @@ public abstract class GeneralList implements Saveable, Loadable{
     }
 
     @Override
-    public List<Todo> load() {
-        try {
-            FileReader fr = new FileReader(nameOfList + ".txt");
-            BufferedReader br = new BufferedReader(fr);
-
+    public List<Todo> load(String listName) throws FileNotFoundException {
+        FileReader fr = new FileReader(listName + ".txt");
+        BufferedReader br = new BufferedReader(fr);
+        try{
             String str;
             while((str = br.readLine()) !=  null){
                 System.out.println(str + "\n");
