@@ -6,6 +6,12 @@ public class TodoList extends GeneralList{
     public TodoList(){
     }
 
+    public void removeItem(Todo item){
+        if(todoList.contains(item)){
+            int index = todoList.indexOf(item);
+            todoList.remove(index);
+        }
+    }
 
     @Override
     public void extractInfo(Todo item) {

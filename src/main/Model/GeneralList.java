@@ -11,6 +11,7 @@ public abstract class GeneralList implements Saveable, Loadable{
     protected List<Todo> todoList = new ArrayList<>();
     protected String nameOfList = "To-Do List";
 
+
     //MODIFIES: this
     //EFFECTS: allows the user to set the name of each list
     public void setNameOfList(String nameOfList) {

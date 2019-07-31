@@ -2,6 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Todo {
 
@@ -43,4 +44,16 @@ public class Todo {
         return price;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Todo todo = (Todo) o;
+        return Objects.equals(todoPosting, todo.todoPosting);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(todoPosting);
+    }
 }

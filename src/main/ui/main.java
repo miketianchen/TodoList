@@ -7,6 +7,8 @@ import Model.Todo;
 import Model.TodoList;
 
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class main {
@@ -14,7 +16,7 @@ public class main {
     private ShoppingList shoppingList = new ShoppingList();
     private boolean runtimeCondition = false;
     private Scanner sc = new Scanner(System.in);
-
+    private Map<String, TodoList> listMap = new HashMap<>();
 
     public static void main(String[] args){
         main run = new main();
@@ -29,6 +31,10 @@ public class main {
     public void initiateProgram(){
 
         String listOption = promptForShoppingOrTodoList();
+
+//        String listTitle = promptForListName();
+//        listMap.put(listTitle, todoList);
+
         if(listOption.equals("0")){
             todoList.setNameOfList(promptForListName());
             while(!runtimeCondition){
@@ -116,10 +122,24 @@ public class main {
             }
         }else if (listOption.equals("2")){
             promptForSavedFile();
+            promptForDeleteTodoPosting();
         } else{
             System.out.println("Error Please select one of the valid options");
         }
         sc.close();
+    }
+
+    private void promptForDeleteTodoPosting() {
+        System.out.println("Would you like to delete any item from the list you've retrieved?");
+        String deleteTodoString = sc.nextLine();
+        Todo deleteTodo = new Todo(deleteTodoString);
+        todoList.removeItem(deleteTodo);
+        todoList.save();
+        try {
+            todoList.load(todoList.getNameOfList());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private String promptForListName() {
@@ -155,8 +175,10 @@ public class main {
     private void promptForSavedFile(){
         System.out.println("Please enter the name of the list you wish to retrieve: ");
         String fileName = sc.nextLine();
+//        todoList = listMap.get(fileName);
         try {
             todoList.load(fileName);
+            todoList.setNameOfList(fileName);
         } catch (FileNotFoundException e) {
             System.out.println(fileName + " CANNOT BE FOUND!");
         }
