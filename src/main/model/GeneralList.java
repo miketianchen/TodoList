@@ -1,14 +1,13 @@
-package Model;
+package model;
 
-import Model.Exception.TooManyItemException;
+import model.exception.TooManyItemException;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class GeneralList implements Saveable, Loadable{
-
-    protected List<Todo> todoList = new ArrayList<>();
+public abstract class GeneralList implements Saveable, Loadable {
+    protected List<ListItem> todoList = new ArrayList<ListItem>();
     protected String nameOfList = "To-Do List";
 
 
@@ -24,34 +23,40 @@ public abstract class GeneralList implements Saveable, Loadable{
 
     //MODIFIES: this
     //EFFECTS: allows the user to add a to-do item to the to-do list
-    public void addToList(Todo item) throws TooManyItemException {
-        if (todoList.size() >= 5){
-            throw new TooManyItemException();
+    public void addToList(ListItem item) throws TooManyItemException {
+        if (!todoList.contains(item)) {
+            todoList.add(item);
+            item.setTodoList(todoList);
+
+            if (todoList.size() >= 5) {
+                throw new TooManyItemException();
+            }
+            todoList.add(item);
         }
-        todoList.add(item);
     }
 
-    public abstract void extractInfo(Todo item);
+    public abstract void extractInfo(ListItem item);
 
     //EFFECTS: allows the user to retrieve the to-do list
-    public List<Todo> retrieveTodoList(){
+    public List<ListItem> retrieveTodoList() {
         return todoList;
     }
 
-    public int sizeOfList(){
+    public int sizeOfList() {
         return todoList.size();
     }
 
     //EFFECTS: displays the to-do postings
     public abstract void showPostings();
 
+    // AREAS OF HIGH COUPLING WITH ShoppingList.java---------------------------------------------------
     @Override
     public void save() {
         try {
-            FileWriter fw = new FileWriter(nameOfList+".txt");
+            FileWriter fw = new FileWriter(nameOfList + ".txt");
             PrintWriter pw = new PrintWriter(fw);
-            for(Todo todo : todoList){
-                pw.println(todo.getTodoPosting());
+            for (ListItem todo : todoList) {
+                pw.println(todo.getPosting());
             }
 
             pw.close();
@@ -61,12 +66,12 @@ public abstract class GeneralList implements Saveable, Loadable{
     }
 
     @Override
-    public List<Todo> load(String listName) throws FileNotFoundException {
+    public List<ListItem> load(String listName) throws FileNotFoundException {
         FileReader fr = new FileReader(listName + ".txt");
         BufferedReader br = new BufferedReader(fr);
-        try{
+        try {
             String str;
-            while((str = br.readLine()) !=  null){
+            while ((str = br.readLine()) !=  null) {
                 System.out.println(str + "\n");
                 Todo todo = new Todo(str);
                 todoList.add(todo);

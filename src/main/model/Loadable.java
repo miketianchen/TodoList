@@ -1,8 +1,8 @@
-package Model;
+package model;
 
 import java.io.FileNotFoundException;
 import java.util.List;
 
 public interface Loadable {
-    List<Todo> load(String listName) throws FileNotFoundException;
+    List<ListItem> load(String listName) throws FileNotFoundException;
 }

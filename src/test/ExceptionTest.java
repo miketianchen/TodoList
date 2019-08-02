@@ -1,5 +1,5 @@
-import Model.GeneralList;
-import Model.TodoList;
+import model.GeneralList;
+import model.TodoList;
 import org.junit.Before;
 import org.junit.Test;
 
