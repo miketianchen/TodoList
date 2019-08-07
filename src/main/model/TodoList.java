@@ -1,29 +1,40 @@
 package model;
 
-public class TodoList extends GeneralList {
+import java.util.ArrayList;
+import java.util.List;
 
+public class TodoList {
 
-    public TodoList(){
+    private String name;
+    private List<TodoItem> todoList;
+
+    public TodoList(String name, List<TodoItem> todoList) {
+        this.name = name;
+        this.todoList = todoList;
     }
 
-    public void removeItem(Todo item) {
-        if (todoList.contains(item)) {
-            int index = todoList.indexOf(item);
-            todoList.remove(index);
-        }
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public void extractInfo(ListItem item) {
-        String posting = item.getPosting();
+    public void setName(String name) {
+        this.name = name;
     }
 
-    @Override
-    public void showPostings() {
-        for (ListItem item : todoList) {
-            System.out.println("=== " + item.getPosting() + "\n");
-        }
+    public List<TodoItem> addToList(TodoItem item) {
+        todoList.add(item);
+        return todoList;
     }
 
+    public List<TodoItem> getTodoList() {
+        return todoList;
+    }
 
+    public void setTodoList(ArrayList<TodoItem> todoList) {
+        this.todoList = todoList;
+    }
+
+    public int size() {
+        return todoList.size();
+    }
 }
