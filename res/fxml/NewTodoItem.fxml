@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="300.0" prefWidth="450.0" style="-fx-background-color: linear-gradient(to right, #B24592, #F15F79);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.NewTodoItemController">
+   <children>
+      <JFXTextArea fx:id="newTodoItem" focusColor="WHITE" layoutX="36.0" layoutY="38.0" prefHeight="174.0" prefWidth="379.0" promptText="Enter new Todo Enter new Todo Enter new Todo Enter new Todo Enter new Todo Enter new Todo Enter new Todo Enter new TodoEnter new Todo" style="-fx-background-color: #FFF;" unFocusColor="WHITE" wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextArea>
+      <JFXButton fx:id="saveNewTodoButton" layoutX="151.0" layoutY="263.0" style="-fx-background-color: #707C80;" text="Save New Todo Item" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXDatePicker fx:id="newTodoItemDueDate" defaultColor="WHITE" layoutX="140.0" layoutY="221.0" promptText="Desired Due Date" />
+   </children>
+</AnchorPane>
