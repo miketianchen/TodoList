@@ -96,15 +96,7 @@ public class Controller implements Initializable, Saveable, Loadable, OnClickObs
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        listView.setItems(todoItemObservableList);
-        listView.setCellFactory(todoItemView -> new TodoListViewCell());
-
-        listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                detailedListItem.setText(listView.getSelectionModel().getSelectedItem());
-            }
-        });
+        listViewSetup();
 
         listNameListView.setItems(listNameObservableList);
         listNameListView.setCellFactory(listItemView -> new ListItemCell());
@@ -131,6 +123,18 @@ public class Controller implements Initializable, Saveable, Loadable, OnClickObs
 
 
         setUpButtonActionEvents();
+    }
+
+    private void listViewSetup() {
+        listView.setItems(todoItemObservableList);
+        listView.setCellFactory(todoItemView -> new TodoListViewCell());
+
+        listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                detailedListItem.setText(listView.getSelectionModel().getSelectedItem());
+            }
+        });
     }
 
     private void setUpButtonActionEvents() {
