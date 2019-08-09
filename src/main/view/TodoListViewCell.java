@@ -43,10 +43,7 @@ public class TodoListViewCell extends ListCell<String> {
                     e.printStackTrace();
                 }
             }
-//            deleteButton.setText("Delete");
-//            deleteButton.setOnAction(event -> getListView().getItems().remove(getItem()));
-//
-//            todoContent.setText(item);
+
             setUpButtons(item);
 
             setText(null);

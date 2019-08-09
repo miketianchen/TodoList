@@ -1,6 +1,7 @@
 import model.TodoItem;
 import model.TodoList;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ public class TodoListTest {
     TodoList todoList;
     List<TodoItem> list;
 
-    @Before
+    @BeforeEach
     public void setup() {
         list = new ArrayList<>();
 
@@ -29,13 +30,31 @@ public class TodoListTest {
         todoList = new TodoList("New TodoList", list);
     }
 
+    @Test
     public void testGetterAndSetter() {
         String newName = "NEW NAME";
         todoList.setName(newName);
         assertTrue(todoList.getName().equals(newName));
     }
 
+    @Test
     public void testAddToList() {
         TodoItem newTodoItem = new TodoItem("New Todo");
+        todoList.addToList(newTodoItem);
+        assertTrue(todoList.size() == 5);
+    }
+
+    @Test
+    public void testGetTodoList() {
+        List<TodoItem> retrieveList = todoList.getTodoList();
+        assertTrue(retrieveList.size() == todoList.size());
+
+    }
+
+    @Test
+    public void testSetTodoList() {
+        ArrayList<TodoItem> emptyList = new ArrayList<>();
+        todoList.setTodoList(emptyList);
+        assertTrue(todoList.size() == 0);
     }
 }

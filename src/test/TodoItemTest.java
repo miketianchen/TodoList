@@ -1,6 +1,6 @@
 import model.TodoItem;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;
 
@@ -8,7 +8,7 @@ public class TodoItemTest {
 
     TodoItem todoItem;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         todoItem = new TodoItem("Dummy Text", "08-15-2019");
     }

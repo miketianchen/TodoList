@@ -17,4 +17,10 @@ public class Subject {
             observer.update();
         }
     }
+
+//    public void notifyObservers(String selectedListString) {
+//        for (OnClickObserver observer : observers) {
+//            observer.update(selectedListString);
+//        }
+//    }
 }

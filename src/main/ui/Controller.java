@@ -6,6 +6,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Loadable;
 import model.Saveable;
@@ -42,6 +44,9 @@ public class Controller implements Initializable, Saveable, Loadable, OnClickObs
 
     @FXML
     private ImageView refreshQuoteButton;
+
+    @FXML
+    private Label detailedListItem;
 
     @FXML
     private ListView<String> listView;
@@ -93,6 +98,13 @@ public class Controller implements Initializable, Saveable, Loadable, OnClickObs
     public void initialize(URL location, ResourceBundle resources) {
         listView.setItems(todoItemObservableList);
         listView.setCellFactory(todoItemView -> new TodoListViewCell());
+
+        listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                detailedListItem.setText(listView.getSelectionModel().getSelectedItem());
+            }
+        });
 
         listNameListView.setItems(listNameObservableList);
         listNameListView.setCellFactory(listItemView -> new ListItemCell());
@@ -214,4 +226,9 @@ public class Controller implements Initializable, Saveable, Loadable, OnClickObs
     public void update() {
         saveList();
     }
+
+//    @Override
+//    public void update(String selectedListText) {
+//        detailedListItemText.setText(selectedListText);
+//    }
 }

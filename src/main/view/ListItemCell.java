@@ -39,6 +39,7 @@ public class ListItemCell extends ListCell<String> {
                     e.printStackTrace();
                 }
 
+
 //                deleteList.setText("Delete");
 //                deleteList.setOnAction(event -> getListView().getItems().remove(getItem()));
 
