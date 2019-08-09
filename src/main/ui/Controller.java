@@ -84,6 +84,18 @@ public class Controller implements Initializable, Saveable, Loadable, OnClickObs
     public void initialize(URL location, ResourceBundle resources) {
         listViewSetup();
 
+        listNameListsViewSetup();
+
+        // Setup all the Images for the buttons
+        initializeImages();
+
+        // Setup the API Call to retrieve the motivational quote
+        retrieveMotivationalQuote();
+
+        setUpButtonActionEvents();
+    }
+
+    private void listNameListsViewSetup() {
         listNameListView.setItems(listNameObservableList);
         listNameListView.setCellFactory(listItemView -> new ListItemCell());
         //AUTOMATICALLY SELECTS THE FIRST ITEM IN THE LISTVIEW
@@ -96,18 +108,8 @@ public class Controller implements Initializable, Saveable, Loadable, OnClickObs
                 currentList = todoListMap.get(newValue);
                 todoItemObservableList.clear();
                 todoItemObservableList.addAll(currentList);
-                System.out.println("pleaseee print the right thing" + newValue);
-
             }
         });
-
-        // Setup all the Images for the buttons
-        initializeImages();
-
-        // Setup the API Call to retrieve the motivational quote
-        retrieveMotivationalQuote();
-
-        setUpButtonActionEvents();
     }
 
     private void listViewSetup() {
