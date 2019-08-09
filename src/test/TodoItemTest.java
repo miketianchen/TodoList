@@ -33,9 +33,5 @@ public class TodoItemTest {
         assertFalse(differentDate.equals(todoItem.getDueDate()));
     }
 
-    @Test
-    public void testEquals() {
-        TodoItem newTodo = new TodoItem("Dummy Text");
-        assertTrue(newTodo.equals(todoItem));
-    }
+
 }

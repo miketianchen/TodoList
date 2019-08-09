@@ -20,8 +20,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Loadable;
 import model.Saveable;
+import model.Weather;
+import ui.apicall.QuoteGenerator;
+import ui.apicall.WeatherGenerator;
 import ui.observer.OnClickObserver;
-import ui.singleton.QuoteGenerator;
 import ui.view.ListItemCell;
 import ui.view.NewTodoItemController;
 import ui.view.TodoListViewCell;
@@ -46,7 +48,16 @@ public class Controller implements Initializable, Saveable, Loadable, OnClickObs
     private ImageView refreshQuoteButton;
 
     @FXML
+    private ImageView weatherIcon;
+
+    @FXML
     private Label detailedListItem;
+
+    @FXML
+    private Label weatherDetailLabel;
+
+    @FXML
+    private Label weatherTemp;
 
     @FXML
     private ListView<String> listView;
@@ -66,6 +77,8 @@ public class Controller implements Initializable, Saveable, Loadable, OnClickObs
     private Map<String, List<String>> todoListMap;
 
     private List<String> currentList;
+
+    private Weather weather;
 
 
     public Controller() {
@@ -92,7 +105,39 @@ public class Controller implements Initializable, Saveable, Loadable, OnClickObs
         // Setup the API Call to retrieve the motivational quote
         retrieveMotivationalQuote();
 
+        // Setup the API Call to retrieve the Weather
+        setupWeather();
+
         setUpButtonActionEvents();
+
+    }
+
+    private void setupWeather() {
+        retrieveWeatherInfo();
+        setupWeatherIcon();
+        weatherDetailLabel.setText(weather.getWeatherInfo());
+        weatherTemp.setText(String.format("%.1f", Double.parseDouble(weather.getWeatherTemp()) - 273.15) + " C");
+    }
+
+    private void setupWeatherIcon() {
+        String weatherId = weather.getWeatherId();
+        String weatherIdFirstIndex = weatherId.substring(0, 1);
+
+        if (weatherId.equals("800")) {
+            weatherIcon.setImage(new Image("/icons/weatherIcons/sun-5-512.png"));
+        } else if (weatherIdFirstIndex.equals("8")) {
+            weatherIcon.setImage(new Image("/icons/weatherIcons/cloudy-512.png"));
+        } else if (weatherIdFirstIndex.equals("3")) {
+            weatherIcon.setImage(new Image("/icons/weatherIcons/little-rain-512.png"));
+        } else if (weatherIdFirstIndex.equals("5")) {
+            weatherIcon.setImage(new Image("/icons/weatherIcons/rain-512.png"));
+        } else if (weatherIdFirstIndex.equals("2")) {
+            weatherIcon.setImage(new Image("/icons/weatherIcons/storm-512.png"));
+        } else if (weatherIdFirstIndex.equals("6")) {
+            weatherIcon.setImage(new Image("/icons/weatherIcons/snow-512.png"));
+        } else {
+            weatherIcon.setImage(new Image("/icons/weatherIcons/fog-day-512.png"));
+        }
     }
 
     private void listNameListsViewSetup() {
@@ -172,6 +217,12 @@ public class Controller implements Initializable, Saveable, Loadable, OnClickObs
             authorString = "Anonymous";
         }
         motivationalTextLabel.setText(quoteString + " - " + authorString);
+    }
+
+    private void retrieveWeatherInfo() {
+        weather = WeatherGenerator.getInstance().retrieveJsonResponse();
+        // PLACEHOLDER FOR NOW
+        System.out.println(weather.getWeatherId());
     }
 
     @Override

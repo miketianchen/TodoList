@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Objects;
-
 public class TodoItem {
     private String todoPosting;
     private String dueDate = "N/A";
@@ -32,20 +30,4 @@ public class TodoItem {
         this.dueDate = dueDate;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof TodoItem)) {
-            return false;
-        }
-        TodoItem todoItem = (TodoItem) o;
-        return Objects.equals(todoPosting, todoItem.todoPosting);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(todoPosting);
-    }
 }

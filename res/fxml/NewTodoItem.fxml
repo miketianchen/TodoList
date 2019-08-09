@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="300.0" prefWidth="450.0" style="-fx-background-color: linear-gradient(to right, #B24592, #F15F79);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.view.NewTodoItemController">
+<AnchorPane prefHeight="300.0" prefWidth="450.0" style="-fx-background-color: linear-gradient(to right, #ec008c, #fc6767);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.view.NewTodoItemController">
    <children>
       <JFXTextArea fx:id="newTodoItem" focusColor="WHITE" layoutX="36.0" layoutY="38.0" prefHeight="174.0" prefWidth="379.0" promptText="Enter new Todo Enter new Todo Enter new Todo Enter new Todo Enter new Todo Enter new Todo Enter new Todo Enter new TodoEnter new Todo" style="-fx-background-color: #FFF;" unFocusColor="WHITE" wrapText="true">
          <font>

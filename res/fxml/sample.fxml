@@ -22,7 +22,7 @@
             <Image url="@../icons/addButton/drawable-xxxhdpi/baseline_add_box_white_48.png" />
          </image>
       </ImageView>
-      <Label fx:id="motivationalTextLabel" alignment="CENTER" layoutX="192.0" layoutY="473.0" prefHeight="53.0" prefWidth="616.0" text="SOMETHING VERY MOTIVATIONAL" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+      <Label fx:id="motivationalTextLabel" alignment="CENTER" layoutX="192.0" layoutY="476.0" prefHeight="53.0" prefWidth="616.0" text="SOMETHING VERY MOTIVATIONAL" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
       <ImageView fx:id="refreshQuoteButton" fitHeight="60.0" fitWidth="60.0" layoutX="926.0" layoutY="469.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../icons/refreshButton/drawable-xxxhdpi/baseline_refresh_white_48.png" />
@@ -30,12 +30,19 @@
       </ImageView>
       <AnchorPane layoutX="551.0" layoutY="25.0" prefHeight="450.0" prefWidth="367.0" style="-fx-background-color: #FFF;">
          <children>
-            <Label fx:id="detailedListItem" alignment="TOP_LEFT" layoutX="11.0" layoutY="12.0" prefHeight="426.0" prefWidth="346.0" style="-fx-background-color: #fff;" text="Add A New To-Do Posting!" textFill="#555f61" wrapText="true">
+            <Label fx:id="detailedListItem" alignment="TOP_LEFT" layoutX="17.0" layoutY="12.0" prefHeight="426.0" prefWidth="333.0" style="-fx-background-color: #fff;" textFill="#555f61" wrapText="true">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
+      <ImageView fx:id="weatherIcon" fitHeight="60.0" fitWidth="60.0" layoutX="931.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/weatherIcons/rain-512.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="weatherDetailLabel" alignment="CENTER" layoutX="947.0" layoutY="75.0" text="Clear" textFill="WHITE" />
+      <Label fx:id="weatherTemp" alignment="CENTER" layoutX="944.0" layoutY="90.0" text="20.7 C" textFill="WHITE" />
    </children>
 </AnchorPane>

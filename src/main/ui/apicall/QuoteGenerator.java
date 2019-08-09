@@ -1,4 +1,4 @@
-package ui.singleton;
+package ui.apicall;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
