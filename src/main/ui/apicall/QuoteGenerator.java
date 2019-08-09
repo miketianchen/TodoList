@@ -3,13 +3,12 @@ package ui.apicall;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import model.Quote;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class QuoteGenerator {
 
@@ -20,6 +19,8 @@ public class QuoteGenerator {
     private Response response;
 
     private String jsonReponse;
+
+    private Quote quote;
 
     private static QuoteGenerator quoteGenerator;
 
@@ -34,20 +35,18 @@ public class QuoteGenerator {
         return quoteGenerator;
     }
 
-    public List<String> getQuoteJson() {
+    public Quote getQuoteJson() {
         setUpRequest();
-        List<String> quoteAuthorList = new ArrayList<>();
         try {
             executeCall();
             getJsonReponse();
             String quoteString = getQuoteString();
             String authorString = getAuthorString();
-            quoteAuthorList.add(quoteString);
-            quoteAuthorList.add(authorString);
+            quote = new Quote(quoteString, authorString);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return quoteAuthorList;
+        return quote;
     }
 
     private void setUpRequest() {

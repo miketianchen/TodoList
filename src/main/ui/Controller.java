@@ -19,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Loadable;
+import model.Quote;
 import model.Saveable;
 import model.Weather;
 import ui.apicall.QuoteGenerator;
@@ -79,6 +80,7 @@ public class Controller implements Initializable, Saveable, Loadable, OnClickObs
     private List<String> currentList;
 
     private Weather weather;
+    private Quote quote;
 
 
     public Controller() {
@@ -210,9 +212,9 @@ public class Controller implements Initializable, Saveable, Loadable, OnClickObs
 
 
     private void retrieveMotivationalQuote() {
-        ArrayList<String> quoteAuthorList = (ArrayList<String>) QuoteGenerator.getInstance().getQuoteJson();
-        String quoteString = quoteAuthorList.get(QUOTE_TEXT_INDEX);
-        String authorString = quoteAuthorList.get(QUOTE_AUTHOR_INDEX);
+        quote = QuoteGenerator.getInstance().getQuoteJson();
+        String quoteString = quote.getQuote();
+        String authorString = quote.getAuthor();
         if (authorString.equals("")) {
             authorString = "Anonymous";
         }
