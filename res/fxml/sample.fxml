@@ -42,7 +42,7 @@
             <Image url="@../icons/weatherIcons/rain-512.png" />
          </image>
       </ImageView>
-      <Label fx:id="weatherDetailLabel" alignment="CENTER" layoutX="947.0" layoutY="75.0" text="Clear" textFill="WHITE" />
+      <Label fx:id="weatherDetailLabel" alignment="CENTER" layoutX="943.0" layoutY="75.0" text="Clear" textFill="WHITE" />
       <Label fx:id="weatherTemp" alignment="CENTER" layoutX="944.0" layoutY="90.0" text="20.7 C" textFill="WHITE" />
    </children>
 </AnchorPane>
