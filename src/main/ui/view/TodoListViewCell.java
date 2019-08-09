@@ -1,4 +1,4 @@
-package view;
+package ui.view;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.AnchorPane;
+import ui.Controller;
+import ui.observer.OnClickObserver;
 
 import java.io.IOException;
 
@@ -24,6 +26,12 @@ public class TodoListViewCell extends ListCell<String> {
     private JFXButton deleteButton;
 
     private FXMLLoader fxmlLoader;
+
+    OnClickObserver observer;
+
+    public TodoListViewCell(Controller observable) {
+        this.observer = observable;
+    }
 
     @Override
     protected void updateItem(String item, boolean empty) {
@@ -53,7 +61,13 @@ public class TodoListViewCell extends ListCell<String> {
 
     private void setUpButtons(String item) {
         deleteButton.setText("Delete");
-        deleteButton.setOnAction(event -> getListView().getItems().remove(getItem()));
+        deleteButton.setOnAction(event -> {
+            String selectedItem = getListView().getSelectionModel().getSelectedItem();
+            System.out.println(selectedItem);
+            observer.update(selectedItem);
+            getListView().getItems().remove(getItem());
+
+        });
 
         todoContent.setText(item);
     }

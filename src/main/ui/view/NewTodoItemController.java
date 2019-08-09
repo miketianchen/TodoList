@@ -1,4 +1,4 @@
-package view;
+package ui.view;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
@@ -6,8 +6,8 @@ import com.jfoenix.controls.JFXTextArea;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
-import observer.OnClickObserver;
-import observer.Subject;
+import ui.observer.OnClickObserver;
+import ui.observer.Subject;
 
 import java.util.List;
 

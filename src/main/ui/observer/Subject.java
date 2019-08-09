@@ -1,4 +1,4 @@
-package observer;
+package ui.observer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +18,9 @@ public class Subject {
         }
     }
 
-//    public void notifyObservers(String selectedListString) {
-//        for (OnClickObserver observer : observers) {
-//            observer.update(selectedListString);
-//        }
-//    }
+    public void notifyObservers(String deleteListItem) {
+        for (OnClickObserver observer : observers) {
+            observer.update(deleteListItem);
+        }
+    }
 }

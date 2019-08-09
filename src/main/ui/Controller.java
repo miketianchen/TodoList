@@ -20,11 +20,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Loadable;
 import model.Saveable;
-import observer.OnClickObserver;
-import singleton.QuoteGenerator;
-import view.ListItemCell;
-import view.NewTodoItemController;
-import view.TodoListViewCell;
+import ui.observer.OnClickObserver;
+import ui.singleton.QuoteGenerator;
+import ui.view.ListItemCell;
+import ui.view.NewTodoItemController;
+import ui.view.TodoListViewCell;
 
 import java.io.*;
 import java.net.URL;
@@ -32,7 +32,7 @@ import java.util.*;
 
 public class Controller implements Initializable, Saveable, Loadable, OnClickObserver {
 
-    private static final String FILE_NAME = "todolist.txt";
+    private static final String FILE_NAME = "TODOLIST.txt";
     private static final int QUOTE_TEXT_INDEX = 0;
     private static final int QUOTE_AUTHOR_INDEX = 1;
 
@@ -63,34 +63,20 @@ public class Controller implements Initializable, Saveable, Loadable, OnClickObs
     private ObservableList<String> listNameObservableList;
     private ObservableList<String> todoItemObservableList;
 
-    private String listName;
-
-    private String todoListJsonString;
-
     private Map<String, List<String>> todoListMap;
 
     private List<String> currentList;
-
-    private String quoteString;
-    private String authorString;
 
 
     public Controller() {
         todoItemObservableList = FXCollections.observableArrayList();
         listNameObservableList = FXCollections.observableArrayList();
 
-
-//        todoListMap = new Gson().fromJson(
-//                todoListJsonString, new TypeToken<HashMap<String, List<String>>>() {}.getType()
-//        );
         todoListMap = loadList();
         List<String> keyList = new ArrayList<>(todoListMap.keySet());
         listNameObservableList.addAll(keyList);
 
-
-
         System.out.println(todoListMap);
-
     }
 
 
@@ -111,9 +97,9 @@ public class Controller implements Initializable, Saveable, Loadable, OnClickObs
                 todoItemObservableList.clear();
                 todoItemObservableList.addAll(currentList);
                 System.out.println("pleaseee print the right thing" + newValue);
+
             }
         });
-
 
         // Setup all the Images for the buttons
         initializeImages();
@@ -121,13 +107,12 @@ public class Controller implements Initializable, Saveable, Loadable, OnClickObs
         // Setup the API Call to retrieve the motivational quote
         retrieveMotivationalQuote();
 
-
         setUpButtonActionEvents();
     }
 
     private void listViewSetup() {
         listView.setItems(todoItemObservableList);
-        listView.setCellFactory(todoItemView -> new TodoListViewCell());
+        listView.setCellFactory(todoItemView -> new TodoListViewCell(this));
 
         listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -179,8 +164,8 @@ public class Controller implements Initializable, Saveable, Loadable, OnClickObs
 
     private void retrieveMotivationalQuote() {
         ArrayList<String> quoteAuthorList = (ArrayList<String>) QuoteGenerator.getInstance().getQuoteJson();
-        quoteString = quoteAuthorList.get(QUOTE_TEXT_INDEX);
-        authorString = quoteAuthorList.get(QUOTE_AUTHOR_INDEX);
+        String quoteString = quoteAuthorList.get(QUOTE_TEXT_INDEX);
+        String authorString = quoteAuthorList.get(QUOTE_AUTHOR_INDEX);
         if (authorString.equals("")) {
             authorString = "Anonymous";
         }
@@ -214,9 +199,6 @@ public class Controller implements Initializable, Saveable, Loadable, OnClickObs
 
         try {
             BufferedReader br = new BufferedReader(new FileReader(FILE_NAME));
-            //TODO TEMP LOCAL VARIABLE TO RETRIEVE THE VALUE OF THE MAP IN THE FILE, NOTE IN THE
-            //FINAL VERSION OF THE PRODUCT, THE MAP SHOULD BE A GLOBAL VARIABLE AND THIS LOAD METHOD
-            //SHOULD OVERWRITE THAT VALUE, IN ORDER TO LOAD THE MAP SAVED IN THE FILE.
             tempMap = gson.fromJson(br, Map.class);
             System.out.println(tempMap);
         } catch (FileNotFoundException e) {
@@ -231,8 +213,9 @@ public class Controller implements Initializable, Saveable, Loadable, OnClickObs
         saveList();
     }
 
-//    @Override
-//    public void update(String selectedListText) {
-//        detailedListItemText.setText(selectedListText);
-//    }
+    @Override
+    public void update(String selectedListText) {
+        currentList.remove(selectedListText);
+        System.out.println(selectedListText + "yooo in Controller.java");
+    }
 }
