@@ -5,7 +5,7 @@ public class Weather {
     private String weatherId;
     private String weatherInfo;
 
-    public Weather (String weatherTemp, String weatherId, String weatherInfo) {
+    public Weather(String weatherTemp, String weatherId, String weatherInfo) {
         this.weatherTemp = weatherTemp;
         this.weatherId = weatherId;
         this.weatherInfo = weatherInfo;
