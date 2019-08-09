@@ -218,6 +218,6 @@ public class Controller implements Initializable, Saveable, Loadable, OnClickObs
     @Override
     public void update(String selectedListText) {
         currentList.remove(selectedListText);
-        System.out.println(selectedListText + "yooo in Controller.java");
+        saveList();
     }
 }

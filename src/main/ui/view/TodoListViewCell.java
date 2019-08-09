@@ -62,9 +62,8 @@ public class TodoListViewCell extends ListCell<String> {
     private void setUpButtons(String item) {
         deleteButton.setText("Delete");
         deleteButton.setOnAction(event -> {
-            String selectedItem = getListView().getSelectionModel().getSelectedItem();
-            System.out.println(selectedItem);
-            observer.update(selectedItem);
+            System.out.println(item);
+            observer.update(item);
             getListView().getItems().remove(getItem());
 
         });
