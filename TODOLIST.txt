@@ -1,0 +1,22 @@
+{
+  "To-Dos": [
+    "Catch and kill some BUGS",
+    "The DELETE Button Still does not work! Get on that. But before you get on that, you should work to implement Desired Due Date. Get that working is top priority as of now. Maybe after you complete that you can work on another API calls. But the priority right now is definately to finish Desired Due Date or something else idk idk ",
+    "Do you eveer feel like a mistfit, everything inside you is dark and twisted",
+    "One more day!!!!!! Tilll no more studying! Thank fkin lord"
+  ],
+  "Reminders": [
+    "Inside Reminders Tab"
+  ],
+  "Personal": [
+    "Noteeeee delete still does not work!!!!"
+  ],
+  "Work": [
+    "Our achievements of today are but the sum of our thoughts of yesterday. You are today where the thoughts of yesterday have brought you and you will be tomorrow where the thoughts of today takes you. - Blaise Pascal",
+    "Don\u0027t leave a stone unturned. It\u0027s always something, to know you have done the most you could. - Charles Dickens\n",
+    "Twenty years from now you will be more disappointed by the things that you didn\u0027t do than by the ones you did do. So throw off the bowlines. Sail away from the safe harbour. Catch the trade winds in your sails. Explore. Dream. Discover. - Mark Twain",
+    "Sometimes the cards we are dealt are not always fair. However, you must keep smiling and movign on. - Tom Jackson",
+    "fdbdfgdfgdfgd",
+    "fsdf"
+  ]
+}
